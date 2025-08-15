@@ -11,12 +11,12 @@ const int inB3 = 4;
 // l298n 2 (front)
 
 // high for forward
-const int inF1 = 6;
-const int inF4 = 9;
+const int inF2 = 8;
+const int inF3 = 12;
 
 // high for backward
-const int inF2 = 7;
-const int inF3 = 8;
+const int inF1 = 7;
+const int inF4 = 13;
 
 // pwms
 const int enA1 = 6;
@@ -62,20 +62,20 @@ void loop() {
          digitalWrite(inB4, HIGH);
         digitalWrite(inB1, HIGH);
 
-        digitalWrite(inF2, LOW);
-        digitalWrite(inF3, LOW);
-         digitalWrite(inF4, HIGH);
-        digitalWrite(inF1, HIGH);
+        digitalWrite(inF4, LOW);
+        digitalWrite(inF1, LOW);
+         digitalWrite(inF3, HIGH);
+        digitalWrite(inF2, HIGH);
     } else if (str == "b") {
         digitalWrite(inB4, LOW);
        digitalWrite(inB1, LOW);
         digitalWrite(inB3, HIGH);
         digitalWrite(inB2, HIGH);
 
-        digitalWrite(inF4, LOW);
-       digitalWrite(inF1, LOW);
-        digitalWrite(inF3, HIGH);
-        digitalWrite(inF2, HIGH);
+        digitalWrite(inF2, LOW);
+       digitalWrite(inF3, LOW);
+        digitalWrite(inF1, HIGH);
+        digitalWrite(inF4, HIGH);
     } else if (str == "s") {
       digitalWrite(inB1, LOW);
         digitalWrite(inB2, LOW);
