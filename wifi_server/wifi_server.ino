@@ -1,11 +1,9 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 
-/* Put your SSID & Password */
-const char* ssid = "Duncan-wifi-car";  // Enter SSID here
-const char* password = "literally1987";  //Enter Password here
+const char* ssid = "Duncan-wifi-car";  
+const char* password = "literally1987";  
 
-/* Put IP Address details */
 IPAddress local_ip(192,168,1,1);
 IPAddress gateway(192,168,1,1);
 IPAddress subnet(255,255,255,0);
