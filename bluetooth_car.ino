@@ -12,11 +12,11 @@ const int inB3 = 4;
 
 // high for forward
 const int inF2 = 8;
-const int inF3 = 12;
+const int inF3 = 10;
 
 // high for backward
 const int inF1 = 7;
-const int inF4 = 13;
+const int inF4 = 11;
 
 // pwms
 const int enA1 = 6;
@@ -31,20 +31,12 @@ void setup() {
   pinMode(inB3, OUTPUT);
   pinMode(inB4, OUTPUT);
 
-  digitalWrite(inB1, LOW);
-  digitalWrite(inB2, LOW);
-  digitalWrite(inB3, LOW);
-  digitalWrite(inB4, LOW);
-
-   pinMode(inF1, OUTPUT);
+  pinMode(inF1, OUTPUT);
   pinMode(inF2, OUTPUT);
   pinMode(inF3, OUTPUT);
   pinMode(inF4, OUTPUT);
 
-  digitalWrite(inF1, LOW);
-  digitalWrite(inF2, LOW);
-  digitalWrite(inF3, LOW);
-  digitalWrite(inF4, LOW);
+  stop_motors();
   
   Serial.begin(9600);
   
@@ -53,39 +45,55 @@ void setup() {
 
 void loop() {
   if (Serial.available() > 0) {
-    String str = Serial.readString();
+    String str = Serial.readStringUntil('\n');
     str.trim();
 
     if (str == "f") {
-      digitalWrite(inB2, LOW);
-        digitalWrite(inB3, LOW);
-         digitalWrite(inB4, HIGH);
-        digitalWrite(inB1, HIGH);
-
-        digitalWrite(inF4, LOW);
-        digitalWrite(inF1, LOW);
-         digitalWrite(inF3, HIGH);
-        digitalWrite(inF2, HIGH);
+      forward();
+      delay(1000);
+      stop_motors();
     } else if (str == "b") {
-        digitalWrite(inB4, LOW);
-       digitalWrite(inB1, LOW);
-        digitalWrite(inB3, HIGH);
-        digitalWrite(inB2, HIGH);
-
-        digitalWrite(inF2, LOW);
-       digitalWrite(inF3, LOW);
-        digitalWrite(inF1, HIGH);
-        digitalWrite(inF4, HIGH);
-    } else if (str == "s") {
-      digitalWrite(inB1, LOW);
-        digitalWrite(inB2, LOW);
-        digitalWrite(inB3, LOW);
-        digitalWrite(inB4, LOW);
-
-        digitalWrite(inF1, LOW);
-        digitalWrite(inF2, LOW);
-        digitalWrite(inF3, LOW);
-        digitalWrite(inF4, LOW);
+       backward();
+       delay(1000);
+      stop_motors();
     }
   }
+  delay(20);
+}
+
+void stop_motors() {
+    digitalWrite(inB1, LOW);
+    digitalWrite(inB2, LOW);
+    digitalWrite(inB3, LOW);
+    digitalWrite(inB4, LOW);
+
+    digitalWrite(inF1, LOW);
+    digitalWrite(inF2, LOW);
+    digitalWrite(inF3, LOW);
+    digitalWrite(inF4, LOW);
+}
+
+void forward() {
+  digitalWrite(inB2, LOW);
+  digitalWrite(inB3, LOW);
+  digitalWrite(inF3, LOW);
+  digitalWrite(inF1, LOW);
+
+  digitalWrite(inB4, HIGH);
+  digitalWrite(inB1, HIGH);
+  digitalWrite(inF2, HIGH);
+  digitalWrite(inF4, HIGH);
+}
+
+void backward() {
+  digitalWrite(inB4, LOW);
+  digitalWrite(inB1, LOW);
+  digitalWrite(inF2, LOW);
+  digitalWrite(inF4, LOW);
+
+  digitalWrite(inB2, HIGH);
+  digitalWrite(inB3, HIGH);
+  digitalWrite(inF3, HIGH);
+  digitalWrite(inF1, HIGH);
+
 }
