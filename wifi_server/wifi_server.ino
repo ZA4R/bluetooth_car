@@ -22,6 +22,7 @@ void setup() {
   server.on("/", handle_OnConnect);
   server.on("/forward", handle_forward);
   server.on("/backward", handle_backward);
+  server.on("/stop", handle_stop);
   server.onNotFound(handle_NotFound);
   
   server.begin();
@@ -31,6 +32,10 @@ void loop() {
   server.handleClient();
 }
 
+void handle_stop() {
+  Serial.println("s\n");
+  server.send(200, "text/html", SendHTML());
+}
 void handle_OnConnect() {
   Serial.println("ready\n");
   server.send(200, "text/html", SendHTML()); 
@@ -68,6 +73,7 @@ String SendHTML(){
   ptr +="<h1>Controls</h1>\n";
   ptr +="<a class=\"button\" href=\"/forward\">Forward</a>\n";
   ptr +="<a class=\"button\" href=\"/backward\">Backward</a>\n";
+  ptr +="<a class=\"button\" href=\"/stop\">Stop</a>\n";
   ptr +="</body>\n";
   ptr +="</html>\n";
   return ptr;

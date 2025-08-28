@@ -50,11 +50,9 @@ void loop() {
 
     if (str == "f") {
       forward();
-      delay(1000);
-      stop_motors();
     } else if (str == "b") {
        backward();
-       delay(1000);
+    } else if (str == "s") {
       stop_motors();
     }
   }
@@ -83,6 +81,7 @@ void forward() {
   digitalWrite(inB1, HIGH);
   digitalWrite(inF2, HIGH);
   digitalWrite(inF4, HIGH);
+
 }
 
 void backward() {
